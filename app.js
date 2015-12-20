@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var engine = require('ejs-locals');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -12,14 +13,19 @@ var app = express();
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
 // view engine setup
+app.engine('ejs',engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use( express.static( path.join( __dirname, 'assets' )));
 
-var port = '3000';
+//set port
+var port = '8080';
 http.listen(port,function(){
     console.log('port:'+port);   
 });
+
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){

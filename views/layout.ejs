@@ -2,9 +2,20 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">  
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form {position:fixed;bottom: 10px;width: 100%;}
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
   </head>
   <body>
+    <script type="text/javascript" src="js/ejs_production.js"></script>
+    <script src="js/socket.io-1.2.0.js"></script>
+    <script src="js/jquery-1.11.1.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> 
     <%- body %>
   </body>
 </html>
