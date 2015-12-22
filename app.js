@@ -26,6 +26,7 @@ http.listen(port,function(){
     console.log('port:'+port);   
 });
 
+//socket.io
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){
@@ -35,12 +36,8 @@ io.on('connection', function(socket){
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
-    console.log('message: ' + msg);
+    console.log(msg);
   });
-});
-io.emit('some event', { for: 'everyone' });
-io.on('connection', function(socket){
-  socket.broadcast.emit('hi');
 });
 
 // uncomment after placing your favicon in /public

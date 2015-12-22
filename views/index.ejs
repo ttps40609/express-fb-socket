@@ -1,6 +1,11 @@
 <% layout( 'layout' ) -%>
-
+    <script type="text/javascript" src="js/ejs_production.js"></script>
+    <script src="js/socket.io-1.2.0.js"></script>
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/Login/facebook_login.js"></script>
 <h1>welcome</h1>
+<fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();"></fb:login-button>
+<div id="status"></div>
 <ul id="messages"></ul>
 
 <form class="form-inline" >
@@ -15,13 +20,19 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <script>
+  function testAPI() {
   var socket = io();
+  FB.api('/me', function(response) {
   $('form').submit(function(){
-    socket.emit('chat message', $('#user').val()+' : '+$('#m').val());
+    socket.emit('chat message',response.name+' : '+$('#m').val());
     $('#m').val('');
     return false;
-  });
+  });})
   socket.on('chat message', function(msg){
     $('#messages').append($('<li>').text(msg));
   });
+    FB.api('/me', function(response) {
+    console.log(JSON.stringify(response));
+    });
+  }
 </script>
